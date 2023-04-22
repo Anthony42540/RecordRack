@@ -24,69 +24,32 @@ spotifyObject = spotipy.Spotify(auth=token)
 user = spotifyObject.current_user()
 
 displayName = user['display_name']
-followers = user['followers']['total']
 
 while True:
 
     print()
-    print(">>> Welcome to Spotipy " + displayName + "!")
-    print(">>> You have " + str(followers) + " followers.")
+    print(">>> Welcome to RecordRack " + displayName + "!")
     print()
-    print("0 - Search for an artist")
-    print("1 - Exit")
+    print("1 - Add to collection") # all options are to-do
+    print("2 - Remove from collection")
+    print("3 - View collection")
+    print("4 - Different sort options")
+    print("X - Exit")
     print()
     choice = input("Your choice: ")
 
-    if choice == "0":
+    if choice == "1":  # add to collection
         print()
-        searchQuery = input("Ok, what's their name?: ")
+        searchQuery = input("Ok, what record do you want to add?: ")
         print()
-
-        # Get search results
-        searchResults = spotifyObject.search(searchQuery,1,0,"artist")
-
-        # Artist details
-        artist = searchResults['artists']['items'][0]
-        print(artist['name'])
-        print(str(artist['followers']['total']) + " followers")
-        print(artist['genres'][0])
+        searchResults = spotifyObject.search(searchQuery, 1, 0, "album")  # gets the search results based on what album name the user inputs
+        print(json.dumps(searchResults, sort_keys=True, indent=4))  # prints out a json formatted album, this is just to see what info we can access later
+    if choice == "2":  # remove from collection, for now print() so we don't have errors
         print()
-        webbrowser.open(artist['images'][0]['url'])
-        artistID = artist['id']
-
-        # Album and track details
-        trackURIs = []
-        trackArt = []
-        z = 0
-
-        # Extract album data
-        albumResults = spotifyObject.artist_albums(artistID)
-        albumResults = albumResults['items']
-
-        for item in albumResults:
-            print("ALBUM " + item['name'])
-            albumID = item['id']
-            albumArt = item['images'][0]['url']
-
-            # Extra track data
-            trackResults = spotifyObject.album_tracks(albumID)
-            trackResults = trackResults['items']
-
-            for item in trackResults:
-                print(str(z) + ": " + item['name'])
-                trackURIs.append(item['uri'])
-                trackArt.append(albumArt)
-                z+=1
-            print()
-
-        # See album art
-        while True:
-            songSelection = input("Enter a song number to see the album art associated with it (x to exit)")
-            if songSelection == "x":
-                break
-            webbrowser.open(trackArt[int(songSelection)])
-
-    if choice == "1":
+    if choice == "3":  # view collection, for now print() so we don't have errors
+        print()
+    if choice == "4":  # different sort options, for now print() so we don't have errors
+        print()
+    if choice == "X":  # exit the while
         break
 
-# print(json.dumps(VARIABLE, sort_keys=True, indent=4))
