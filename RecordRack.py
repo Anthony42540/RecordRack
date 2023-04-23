@@ -17,8 +17,6 @@ class Album:
 # Get the username from the terminal
 username = sys.argv[1]
 
-# User ID: nightwing42540
-
 # Erase cache and prompt for user permission
 try:
     token = util.prompt_for_user_token(username)

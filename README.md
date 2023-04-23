@@ -1,6 +1,6 @@
 # RecordRack
 
-RecordRack is an application where you can store your collection of records/vinyls.
+RecordRack is an application where you can store your collection of records.
 
 ## Installation
 
