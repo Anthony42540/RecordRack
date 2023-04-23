@@ -16,14 +16,16 @@ class Album:
         self.albumNumTracks = album['total_tracks']
         self.artistName = album['artists'][0]['name']
 
+
 def mergeSort(array, left, right):
-    if (left < right):
+    if left < right:
         # m is the point where the array is divided into two subarrays
         mid = left + (right - left) / 2
         mergeSort(array, left, mid)
         mergeSort(array, mid + 1, right)
         # Merge the sorted subarrays
         merge(array, left, mid, right)
+
 
 def merge(array, left, mid, right):
     # Create X ← arr[left..mid] & Y ← arr[mid+1..right]
@@ -39,7 +41,7 @@ def merge(array, left, mid, right):
     i = 0
     j = 0
     k = left
-    while (i < n1 and j < n2):
+    while i < n1 and j < n2:
         if X[i] <= Y[j]:
             array[k] = X[i]
             i += 1
@@ -48,11 +50,11 @@ def merge(array, left, mid, right):
             j += 1
             k += 1
     # When we run out of elements in either X or Y append the remaining elements
-    while (i < n1):
+    while i < n1:
         array[k] = X[i]
         i += 1
         k += 1
-    while (j < n2):
+    while j < n2:
         array[k] = Y[j]
         j += 1
         k += 1
@@ -74,7 +76,7 @@ spotifyObject = spotipy.Spotify(auth=token)
 
 user = spotifyObject.current_user()
 displayName = user['display_name']
-array = []  # initialize empty array that represents the collection
+albumCollection = []  # initialize empty array that represents the collection
 
 print()
 print(">>> Welcome to RecordRack " + displayName + "!")
@@ -100,7 +102,7 @@ while True:
         obj = Album(searchQuery)
         verify = input("You entered: " + obj.albumName + " - " + obj.artistName + "\nIs this the record you were looking for? Yes or no?\n")
         if verify == "Yes" or verify == "yes":
-            array.append(obj)  # add the object into the collection
+            albumCollection.append(obj)  # add the object into the collection
             print()
             print(obj.albumName + " - " + obj.artistName + " has been added to your collection.")
         elif verify == "No" or verify == "no":
@@ -110,16 +112,16 @@ while True:
             print()
             print("That's not a valid answer -_-")
     elif choice == "2":  # remove from collection, for now print() so we don't have errors
-        if len(array) != 0:
+        if len(albumCollection) != 0:
             recordToDelete = input("What record would you like to remove?\n")
             objToDelete = Album(recordToDelete)
             exist = False
-            for i in array:
+            for i in albumCollection:
                 if objToDelete.albumName == i.albumName:
                     print()
                     verify = input("Is this the record you want to remove? " + objToDelete.albumName + " - " + objToDelete.artistName + " - Yes or no?\n")
                     if verify == "Yes" or verify == "yes":
-                        array.remove(i)  # add the object into the collection
+                        albumCollection.remove(i)  # add the object into the collection
                         print()
                         print(objToDelete.albumName + " - " + objToDelete.artistName + " has been removed from your collection.")
                     elif verify == "No" or verify == "no":
@@ -135,9 +137,9 @@ while True:
         else:
             print("You don't have any records to remove!")
     elif choice == "3":  # view collection
-        if len(array) != 0:
+        if len(albumCollection) != 0:
             print("---Your collection---")
-            for i in array:
+            for i in albumCollection:
                 print(i.albumName + " - " + i.artistName)
         else:
             print("You don't have any records in your collection!")
