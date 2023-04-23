@@ -5,6 +5,7 @@ import spotipy
 import spotipy.util as util
 from json.decoder import JSONDecodeError
 
+
 class Album:
     def __init__(self, albumObj):
         # Gets the search results based on what album name the user inputs
@@ -60,9 +61,9 @@ def merge(array, left, mid, right):
         k += 1
 
 # Get the username from the terminal
-username = sys.argv[1]
 
-# User ID: nightwing42540
+
+username = sys.argv[1]
 
 # Erase cache and prompt for user permission
 try:
