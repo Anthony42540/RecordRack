@@ -1,9 +1,9 @@
 import os
 import sys
-import json
 import spotipy
 import spotipy.util as util
-from json.decoder import JSONDecodeError
+from QuickSort import quickSort
+from MergeSort import mergeSort
 
 
 class Album:
@@ -18,50 +18,7 @@ class Album:
         self.artistName = album['artists'][0]['name']
 
 
-def mergeSort(array, left, right):
-    if left < right:
-        # m is the point where the array is divided into two subarrays
-        mid = left + (right - left) / 2
-        mergeSort(array, left, mid)
-        mergeSort(array, mid + 1, right)
-        # Merge the sorted subarrays
-        merge(array, left, mid, right)
-
-
-def merge(array, left, mid, right):
-    # Create X ← arr[left..mid] & Y ← arr[mid+1..right]
-    n1 = mid - left + 1
-    n2 = right - mid
-    X = [0] * n1
-    Y = [0] * n2
-    for i in range(0, n1):
-        X[i] = array[left + i]
-    for i in range(0, n2):
-        Y[i] = array[mid + 1 + i]
-    # Merge the arrays X and Y into arr
-    i = 0
-    j = 0
-    k = left
-    while i < n1 and j < n2:
-        if X[i] <= Y[j]:
-            array[k] = X[i]
-            i += 1
-        else:
-            array[k] = Y[j]
-            j += 1
-            k += 1
-    # When we run out of elements in either X or Y append the remaining elements
-    while i < n1:
-        array[k] = X[i]
-        i += 1
-        k += 1
-    while j < n2:
-        array[k] = Y[j]
-        j += 1
-        k += 1
-
 # Get the username from the terminal
-
 
 username = sys.argv[1]
 
@@ -146,17 +103,45 @@ while True:
             print("You don't have any records in your collection!")
     # maybe ask for user input on what sorting method to use?
     elif choice == "4":  # sort by album name
+        print("1. Sort with Merge Sort")
+        print("2. Sort with Quick Sort")
         print()
+        nestedChoice = input("Your choice: ")
+        if nestedChoice == "1":
+            mergeSort(albumCollection, 0, len(albumCollection) - 1, "Album Name")
+        elif nestedChoice == "2":
+            quickSort(albumCollection, 0, len(albumCollection) - 1, "Album Name")
     elif choice == "5":  # sort by artist name
+        print("1. Sort with Merge Sort")
+        print("2. Sort with Quick Sort")
         print()
-    elif choice == "6":  # sort by release date
+        nestedChoice = input("Your choice: ")
         print()
+        if nestedChoice == "1":
+            mergeSort(albumCollection, 0, len(albumCollection) - 1, "Artist Name")
+        elif nestedChoice == "2":
+            quickSort(albumCollection, 0, len(albumCollection) - 1, "Artist Name")
+    elif choice == "Release Date":  # sort by release date
+        print("1. Sort with Merge Sort")
+        print("2. Sort with Quick Sort")
+        print()
+        nestedChoice = input("Your choice: ")
+        print()
+        if nestedChoice == "1":
+            mergeSort(albumCollection, 0, len(albumCollection) - 1, "Release Date")
+        elif nestedChoice == "2":
+            quickSort(albumCollection, 0, len(albumCollection) - 1, "Release Date")
     elif choice == "7":  # sort by total number of tracks
+        print("1. Sort with Merge Sort")
+        print("2. Sort with Quick Sort")
         print()
+        nestedChoice = input("Your choice: ")
+        print()
+        if nestedChoice == "1":
+            mergeSort(albumCollection, 0, len(albumCollection) - 1, "Album Number of Tracks")
+        elif nestedChoice == "2":
+            quickSort(albumCollection, 0, len(albumCollection) - 1, "Album Number of Tracks")
     elif choice == "X" or choice == "x":  # exit the while
         break
     else:
-        print("Sorry that's not a valid choice. Try inputting a number 1 - 4 or exit!")
-
-# Prints out a json formatted album, this is just to see what info we can access later
-# print(json.dumps(searchResults, sort_keys=True, indent=4))
+        print("Sorry that's not a valid choice. Try inputting a number 1 - 7 or exit!")
