@@ -2,7 +2,7 @@ import os
 import sys
 import spotipy
 import spotipy.util as util
-from QuickSort import quickSort
+from ThreeWayQS import threeWayQS
 from MergeSort import mergeSort
 
 
@@ -48,7 +48,7 @@ print(">>> Welcome to RecordRack " + displayName + "!")
 while True:
     print()
     print("---RecordRack Menu---")
-    print("1 - Add to collection")  # all options are to-do
+    print("1 - Add to collection")
     print("2 - Remove from collection")
     print("3 - View collection")
     print("4 - Sort by album name")
@@ -75,7 +75,8 @@ while True:
         else:
             print()
             print("That's not a valid answer -_-")
-    elif choice == "2":  # remove from collection, for now print() so we don't have errors
+
+    elif choice == "2":  # remove from collection
         if len(albumCollection) != 0:
             recordToDelete = input("What record would you like to remove?\n")
             objToDelete = Album(recordToDelete)
@@ -105,7 +106,7 @@ while True:
             printAlbums(albumCollection)
         else:
             print("You don't have any records in your collection!")
-    # maybe ask for user input on what sorting method to use?
+
     elif choice == "4":  # sort by album name
         if len(albumCollection) == 0:
             print("You don't have any records in your collection!")
@@ -118,7 +119,7 @@ while True:
             mergeSort(albumCollection, 0, len(albumCollection) - 1, "Album Name")
             printAlbums(albumCollection)
         elif nestedChoice == "2":
-            quickSort(albumCollection, 0, len(albumCollection) - 1, "Album Name")
+            threeWayQS(albumCollection, 0, len(albumCollection) - 1, "Album Name")
             printAlbums(albumCollection)
     elif choice == "5":  # sort by artist name
         if len(albumCollection) == 0:
@@ -133,7 +134,7 @@ while True:
             mergeSort(albumCollection, 0, len(albumCollection) - 1, "Artist Name")
             printAlbums(albumCollection)
         elif nestedChoice == "2":
-            quickSort(albumCollection, 0, len(albumCollection) - 1, "Artist Name")
+            threeWayQS(albumCollection, 0, len(albumCollection) - 1, "Artist Name")
             printAlbums(albumCollection)
     elif choice == "6":  # sort by release date
         if len(albumCollection) == 0:
@@ -148,7 +149,7 @@ while True:
             mergeSort(albumCollection, 0, len(albumCollection) - 1, "Release Date")
             printAlbums(albumCollection)
         elif nestedChoice == "2":
-            quickSort(albumCollection, 0, len(albumCollection) - 1, "Release Date")
+            threeWayQS(albumCollection, 0, len(albumCollection) - 1, "Release Date")
             printAlbums(albumCollection)
     elif choice == "7":  # sort by total number of tracks
         if len(albumCollection) == 0:
@@ -163,7 +164,7 @@ while True:
             mergeSort(albumCollection, 0, len(albumCollection) - 1, "Album Number of Tracks")
             printAlbums(albumCollection)
         elif nestedChoice == "2":
-            quickSort(albumCollection, 0, len(albumCollection) - 1, "Album Number of Tracks")
+            threeWayQS(albumCollection, 0, len(albumCollection) - 1, "Album Number of Tracks")
             printAlbums(albumCollection)
     elif choice == "X" or choice == "x":  # exit the while
         break

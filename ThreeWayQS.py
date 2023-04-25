@@ -1,6 +1,7 @@
-# used Quick Sort code from lecture 6 (Sorting) slide 122
-# used explanation for handling duplicates in quicksort from https://mathcenter.oxford.emory.edu/site/cs171/quickSort3Way/
-def quickSort(arr, low, high, type): # recursive call to use quick sort and partition functions on array
+# utilized Quick Sort code from lecture 6 (Sorting) slide 122
+# used explanation for handling duplicates in quicksort from
+# https://mathcenter.oxford.emory.edu/site/cs171/quickSort3Way/ to implement a 3-way variation of quick sort
+def threeWayQS(arr, low, high, type): # recursive call to use quick sort and partition functions on array
     if low < high:
         if type == "Album Name":  # sort by album name
             left, right = partalbname(arr, low, high)
@@ -11,8 +12,8 @@ def quickSort(arr, low, high, type): # recursive call to use quick sort and part
         else: # sort by track total
             left, right = parttracks(arr, low, high)
         #  recursively called on left and right halves of list (excluding duplicate pivot values)
-        quickSort(arr, low, left - 1, type)
-        quickSort(arr, right, high, type)
+        threeWayQS(arr, low, left - 1, type)
+        threeWayQS(arr, right, high, type)
 
 
 #  partition for album name
