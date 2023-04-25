@@ -24,7 +24,7 @@ def printAlbums(arr):
     for album in arr:
         print(f"{album.albumName:30}{album.artistName:20}{album.albumReleaseDate:20}{album.albumNumTracks:17}")
 
-
+# Used the Spotipy tutorial series by Ian Annase available here: https://www.youtube.com/watch?v=tmt5SdvTqUI&list=PLqgOPibB_QnzzcaOFYmY2cQjs35y0is9N
 # Get the username from the terminal
 username = sys.argv[1]
 
